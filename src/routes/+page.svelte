@@ -5,12 +5,22 @@
 	export let data;
 
 	let metricsData;
+	let graphingData;
+	let tableData;
 	$: {
 		if (data && data.props) {
-			metricsData = data.props.data;
+			metricsData = data.props.poolData;
+			graphingData = data.props.graphData;
+			tableData = data.props.blocksData;
+
+			console.log('data', metricsData);
+			console.log('graphingData', graphingData);
+			console.log('tableData', tableData);
 		} else {
 		}
 	}
+
+	// metricsData.LatestBlocks can be used in another place, maybe a new card with the graph
 </script>
 
 <div class="mt-5">
@@ -19,5 +29,5 @@
 <div class="px-32 gap-4">
 	<MetricsPage data={metricsData} />
 
-	<MetricsTable data={metricsData.LatestBlocks} />
+	<MetricsTable data={tableData} />
 </div>

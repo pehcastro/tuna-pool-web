@@ -7,8 +7,6 @@
 	import * as Card from '$lib/components/ui/card';
 
 	export let data;
-
-	console.log('pool data', data);
 </script>
 
 <div class="flex-col md:flex">
@@ -32,7 +30,7 @@
 					<Users class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
-					<div class="text-2xl font-bold">{data.ActiveMiners}</div>
+					<div class="text-2xl font-bold">{data.activeMiners}</div>
 				</Card.Content>
 			</Card.Root>
 			<Card.Root>
@@ -41,22 +39,22 @@
 					<CreditCard class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
-					<div class="text-2xl font-bold">{data.BlocksPerHour}</div>
+					<div class="text-2xl font-bold">{data.blocksPerHour}</div>
 				</Card.Content>
 			</Card.Root>
 			<Card.Root>
 				<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
-					<Card.Title class="text-sm font-medium">Pool Hash Rate</Card.Title>
+					<Card.Title class="text-sm font-medium">Pool Hashrate</Card.Title>
 					<Activity class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
 					<div class="text-2xl font-bold">
-						{data.PoolHashRate.Rate}
-						{data.PoolHashRate.Denomination}
+						{data.poolHashRate.rate}
+						{data.poolHashRate.denomination}
 					</div>
 					<p class="text-xs text-muted-foreground">
-						Raw PoolHashRate: <span class="text-primary dark:text-secondary"
-							>{data.PoolHashRate.Raw}</span
+						Raw Pool Hashrate: <span class="text-primary dark:text-secondary"
+							>{data.poolHashRate.raw}</span
 						>
 					</p>
 				</Card.Content>
