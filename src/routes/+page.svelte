@@ -1,10 +1,23 @@
 <script>
-	import Button from '$lib/components/ui/button/button.svelte';
+	import Hero from '$lib/components/blocks/Hero.svelte';
+	import MetricsPage from '$lib/components/blocks/metrics/MetricsPage.svelte';
+	import MetricsTable from '$lib/components/blocks/metrics/MetricsTable.svelte';
+	export let data;
+
+	let metricsData;
+	$: {
+		if (data && data.props) {
+			metricsData = data.props.data;
+		} else {
+		}
+	}
 </script>
 
-<div class="flex flex-col justify-center mt-52">
-	<h1 class="flex justify-center">mgpai pool</h1>
-	<div class="flex justify-center">
-		<Button>yay</Button>
-	</div>
+<div class="mt-5">
+	<Hero />
+</div>
+<div class="px-32 gap-4">
+	<MetricsPage data={metricsData} />
+
+	<MetricsTable data={metricsData.LatestBlocks} />
 </div>

@@ -1,0 +1,80 @@
+<script lang="ts">
+	import Activity from '~icons/lucide/activity';
+	import CreditCard from '~icons/lucide/blocks';
+	import DollarSign from '~icons/lucide/circle-dollar-sign';
+	import Users from '~icons/lucide/users';
+
+	import * as Card from '$lib/components/ui/card';
+
+	export let data;
+
+	console.log('pool data', data);
+</script>
+
+<div class="flex-col md:flex">
+	<div class="flex-1 space-y-4 py-5 pt-6">
+		<div class="flex items-center justify-between space-y-2">
+			<h2 class="text-3xl font-bold tracking-tight">Overview</h2>
+		</div>
+		<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+			<Card.Root>
+				<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+					<Card.Title class="text-sm font-medium">Tuna Minted</Card.Title>
+					<DollarSign class="text-muted-foreground h-4 w-4" />
+				</Card.Header>
+				<Card.Content>
+					<div class="text-2xl font-bold">value</div>
+				</Card.Content>
+			</Card.Root>
+			<Card.Root>
+				<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+					<Card.Title class="text-sm font-medium">Active Miners</Card.Title>
+					<Users class="text-muted-foreground h-4 w-4" />
+				</Card.Header>
+				<Card.Content>
+					<div class="text-2xl font-bold">{data.ActiveMiners}</div>
+				</Card.Content>
+			</Card.Root>
+			<Card.Root>
+				<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+					<Card.Title class="text-sm font-medium">Blocks Per Hour</Card.Title>
+					<CreditCard class="text-muted-foreground h-4 w-4" />
+				</Card.Header>
+				<Card.Content>
+					<div class="text-2xl font-bold">{data.BlocksPerHour}</div>
+				</Card.Content>
+			</Card.Root>
+			<Card.Root>
+				<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
+					<Card.Title class="text-sm font-medium">Pool Hash Rate</Card.Title>
+					<Activity class="text-muted-foreground h-4 w-4" />
+				</Card.Header>
+				<Card.Content>
+					<div class="text-2xl font-bold">
+						{data.PoolHashRate.Rate}
+						{data.PoolHashRate.Denomination}
+					</div>
+					<p class="text-xs text-muted-foreground">
+						Raw PoolHashRate: <span class="text-primary dark:text-secondary"
+							>{data.PoolHashRate.Raw}</span
+						>
+					</p>
+				</Card.Content>
+			</Card.Root>
+		</div>
+		<div class="hidden grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+			<Card.Root class="col-span-4">
+				<Card.Header>
+					<Card.Title class="text-2xl">Minted Data</Card.Title>
+				</Card.Header>
+				<Card.Content>content here</Card.Content>
+			</Card.Root>
+			<Card.Root class="col-span-3">
+				<Card.Header>
+					<Card.Title class="text-2xl">Latest Distribution</Card.Title>
+				</Card.Header>
+				<Card.Content>payout table</Card.Content>
+			</Card.Root>
+		</div>
+	</div>
+</div>
