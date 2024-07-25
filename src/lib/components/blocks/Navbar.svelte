@@ -20,7 +20,7 @@
 	/>
 </div>
 
-<nav class="b p-4 flex justify-between items-center z-99 px-10 md:px-14">
+<nav class="b p-4 hidden md:flex justify-between items-center z-99 md:px-14">
 	<div class="text-black dark:text-white text-lg font-bold"><a href="/">Atago</a></div>
 	<ul class="flex space-x-12 font-semibold uppercase text-sm">
 		<li>
@@ -46,6 +46,15 @@
 			>
 		</li>
 	</ul>
+	<div class="flex items-center gap-4">
+		<a href="/" target="_blank"><DiscordIcon class="size-8 hover:scale-95" /></a>
+		<ThemeSwitcher />
+	</div>
+</nav>
+
+<nav class="b p-4 px-8 flex md:hidden justify-between items-center z-99 md:px-14">
+	<div class="text-black dark:text-white text-lg font-bold"><a href="/">Atago</a></div>
+
 	<div class="flex items-center gap-4">
 		<a href="/" target="_blank"><DiscordIcon class="size-8 hover:scale-95" /></a>
 		<ThemeSwitcher />
