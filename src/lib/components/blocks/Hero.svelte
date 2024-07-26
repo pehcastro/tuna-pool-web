@@ -23,8 +23,11 @@
 				<!-- End Title -->
 				<div class="mt-5 max-w-3xl">
 					<p class="text-xl text-muted-foreground">
-						Mine <span class="font-bold dark:text-secondary"> Fortuna</span> with other commmunity members
-						with a open-source tool and explorer maintened by the community
+						Mine <span class="font-bold dark:text-secondary text-primary">
+							<a href="https://minefortuna.com" target="_blank">Fortuna</a></span
+						>
+						with our pool using a open-source miner maintened by the community,
+						<a href="/guide" target="_blank" class="text-primary">click here to start</a>
 					</p>
 				</div>
 				<!-- search -->

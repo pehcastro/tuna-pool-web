@@ -8,7 +8,7 @@
 	import WorkersIcon from '~icons/lucide/pickaxe';
 	import HashIcon from '~icons/lucide/activity';
 	import { formatTunaValue } from '$lib/utils/formatTuna';
-
+	import CardanoIcon from '~icons/simple-icons/cardano';
 	export let data;
 </script>
 
@@ -22,7 +22,7 @@
 						href="https://preview.cardanoscan.io/address/{$address}"
 						class="text-primary dark:text-secondary flex gap-2 break-all"
 						>{$address}
-						<img src="/src/lib/images/cardanoscan.png" alt={$address} class="size-5" /></a
+						<CardanoIcon class="size-6 text-primary dark:text-white" /></a
 					>
 				</Card.Description>
 			</Card.Header>

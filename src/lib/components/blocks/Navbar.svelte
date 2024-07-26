@@ -21,7 +21,11 @@
 </div>
 
 <nav class="b p-4 hidden md:flex justify-between items-center z-99 md:px-14">
-	<div class="text-black dark:text-white text-lg font-bold"><a href="/">Atago</a></div>
+	<div class="text-black dark:text-white text-3xl font-bold">
+		<a href="/" class="flex gap-2 items-center"
+			><img src="/atagologo.png" alt="Logo" class="size-10" /> Atago</a
+		>
+	</div>
 	<ul class="flex space-x-12 font-semibold uppercase text-sm">
 		<li>
 			<a
@@ -53,7 +57,11 @@
 </nav>
 
 <nav class="flex md:hidden justify-between items-center z-99 p-4 px-10 pr-16">
-	<div class="text-black dark:text-white text-lg font-bold"><a href="/">Atago</a></div>
+	<div class="text-black dark:text-white text-3xl font-bold">
+		<a href="/" class="flex gap-2 items-center"
+			><img src="/atagologo.png" alt="Logo" class="size-9" /> Atago</a
+		>
+	</div>
 
 	<div class="flex items-center gap-4">
 		<a href="/" target="_blank"><DiscordIcon class="size-8 hover:scale-95" /></a>
