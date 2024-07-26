@@ -9,6 +9,7 @@
 	import MinerTable from '$lib/components/blocks/miner/MinerTable.svelte';
 	import { isLoading } from '$lib/store';
 	import CardanoIcon from '~icons/mingcute/cardano-ada-line';
+	import { walletAddress } from '$lib/store';
 	const address = derived(page, ($page) => $page.params.address);
 	export let data: any;
 
