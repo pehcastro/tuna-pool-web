@@ -20,7 +20,7 @@
 <div class="mt-5">
 	<Hero />
 </div>
-<div class="md:px-32 gap-4 p-4 px-8">
+<div class="md:px-32 gap-4 p-4">
 	<MetricsPage data={metricsData} graph={graphingData} />
 
 	<MetricsTable data={tableData} />

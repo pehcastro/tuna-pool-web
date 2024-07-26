@@ -52,7 +52,7 @@
 	</div>
 </nav>
 
-<nav class="b p-4 px-8 flex md:hidden justify-between items-center z-99 md:px-14">
+<nav class="flex md:hidden justify-between items-center z-99 p-4 px-10 pr-16">
 	<div class="text-black dark:text-white text-lg font-bold"><a href="/">Atago</a></div>
 
 	<div class="flex items-center gap-4">

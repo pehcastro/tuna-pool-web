@@ -55,5 +55,7 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+		overflow-x: hidden; /* Add this line */
+		width: 100%; /* Ensure body takes full width */
 	}
 }

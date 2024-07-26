@@ -63,12 +63,12 @@
 			</Card.Root>
 		</div>
 
-		<div class="hidden md:grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+		<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
 			<Card.Root class="col-span-4">
 				<Card.Header>
 					<Card.Title class="text-2xl">Hashrate History</Card.Title>
 				</Card.Header>
-				<Card.Content class="h-[25vw] w-full -p-24">
+				<Card.Content class="md:h-[25vw] w-full -p-24 h-[100vw]">
 					<HashrateGraph data={graph} />
 				</Card.Content>
 			</Card.Root>
