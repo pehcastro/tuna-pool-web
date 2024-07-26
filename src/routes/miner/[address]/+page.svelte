@@ -28,7 +28,7 @@
 
 	onMount(async () => {
 		if (!data.data) return;
-		const hashrateResponse = await fetch(`http://172.233.85.128:6900/pool/miner/${$address}/hashrate
+		const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate
 `);
 		const hashrateData = await hashrateResponse.json();
 		minerHashrate = hashrateData;
@@ -37,7 +37,7 @@
 			workersResponses = await Promise.all(
 				workersData.map(async (worker) => {
 					const response = await fetch(
-						`http://172.233.85.128:6900/pool/miner/${$address}/${worker.rigId}/hashrate`
+						`https://api.atago.io/pool/miner/${$address}/${worker.rigId}/hashrate`
 					);
 					const data = await response.json();
 					return data.map((item) => ({ ...item, rigId: worker.rigId }));
