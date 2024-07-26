@@ -2,26 +2,74 @@
 	import MinerHeader from '$lib/components/blocks/miner/MinerHeader.svelte';
 	import MinerWorkers from '$lib/components/blocks/miner/MinerWorkers.svelte';
 	import SearchBar from '$lib/components/utils/SearchBar.svelte';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { derived } from 'svelte/store';
+	import MinerMetrics from '$lib/components/blocks/miner/MinerMetrics.svelte';
+	import MinerTable from '$lib/components/blocks/miner/MinerTable.svelte';
 
+	const address = derived(page, ($page) => $page.params.address);
 	export let data: any;
 
 	let minerData: any;
+	let workersData: any;
+	let minerHashrate;
+	let workersResponses = [];
+	let minerBlocksData;
 
 	$: {
 		if (data && data.data) {
-			minerData = data.data;
+			minerData = data.data.minerAccount;
+			workersData = data.data.workers;
+			minerBlocksData = data.data.blocks;
 		} else {
 		}
 	}
+
+	onMount(async () => {
+		if (!data.data) return;
+		const hashrateResponse = await fetch(`http://172.233.85.128:6900/pool/miner/${$address}/hashrate
+`);
+		const hashrateData = await hashrateResponse.json();
+		minerHashrate = hashrateData;
+
+		if (workersData && workersData.length > 0) {
+			workersResponses = await Promise.all(
+				workersData.map(async (worker) => {
+					const response = await fetch(
+						`http://172.233.85.128:6900/pool/miner/${$address}/${worker.rigId}/hashrate`
+					);
+					const data = await response.json();
+					return data.map((item) => ({ ...item, rigId: worker.rigId }));
+				})
+			);
+		}
+	});
 </script>
 
-{#if data && (data.data.ActiveWorkers > 0 || data.data.Balance > 0)}
+{#if data.data.workers && data.data.workers.length > 0}
 	<div>
 		<MinerHeader data={minerData} />
 	</div>
+
+	{#if minerHashrate}
+		<div>
+			<MinerMetrics graph={minerHashrate} payments={minerData.payments} />
+		</div>
+	{/if}
+
+	{#if workersResponses.length > 0}
+		<div>
+			<MinerWorkers workers={workersData} hashrates={workersResponses} />
+		</div>
+	{/if}
+
 	<div>
-		<MinerWorkers data={minerData.WorkerList} />
+		<MinerTable data={minerBlocksData} />
 	</div>
+	<!-- <div>
+		<MinerWorkers />
+	</div> -->
 {:else}
 	<div class="flex flex-col justify-center pt-32">
 		<div class="flex justify-center">

@@ -3,6 +3,7 @@
 	import CreditCard from '~icons/lucide/blocks';
 	import DollarSign from '~icons/lucide/circle-dollar-sign';
 	import Users from '~icons/lucide/users';
+	import { formatTunaValue } from '$lib/utils/formatTuna';
 
 	import * as Card from '$lib/components/ui/card';
 	import HashrateGraph from './HashrateGraph.svelte';
@@ -34,7 +35,9 @@
 					<DollarSign class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
-					<div class="text-2xl font-bold">{formatNumber(totalMined.totalMinedTokens)}</div>
+					<div class="text-2xl font-bold">
+						{formatNumber(formatTunaValue(totalMined.totalMinedTokens))}
+					</div>
 				</Card.Content>
 			</Card.Root>
 			<Card.Root>

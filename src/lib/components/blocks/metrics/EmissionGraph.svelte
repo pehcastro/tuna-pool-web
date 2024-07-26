@@ -1,23 +1,9 @@
 <script lang="ts">
-	import {
-		Chart,
-		Svg,
-		Area,
-		Tooltip,
-		TooltipItem,
-		LinearGradient,
-		RectClipPath,
-		Highlight,
-		ChartClipPath,
-		Axis,
-		Spline,
-		Labels,
-		Bars
-	} from 'layerchart';
+	import { Chart, Svg, Tooltip, Highlight, Bars } from 'layerchart';
 	import { cubicInOut } from 'svelte/easing';
 	import { scaleBand } from 'd3-scale';
 	import { format } from 'date-fns';
-
+	import { formatTunaValue } from '$lib/utils/formatTuna';
 	export let data;
 
 	$: data = data.map((d) => ({ ...d, date: new Date(d.date), value: d.value }));
@@ -65,7 +51,7 @@
 				let:data
 				header={(data) => format(data.date, 'eee, MMMM do')}
 			>
-				<span class="text-foreground pt-2">{formatNumber(data.value)}</span>
+				<span class="text-foreground pt-2">{formatNumber(formatTunaValue(data.value))}</span>
 			</Tooltip>
 		</Chart>
 	</div>

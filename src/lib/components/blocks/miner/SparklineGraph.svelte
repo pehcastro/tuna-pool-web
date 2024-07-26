@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Chart, Svg, Area, Tooltip, LinearGradient, RectClipPath, Highlight } from 'layerchart';
 	import { cubicInOut } from 'svelte/easing';
-	import { scaleTime, scaleLinear } from 'd3-scale';
+	import { scaleTime } from 'd3-scale';
 	import { format } from 'date-fns';
 
 	export let data;
@@ -25,7 +25,7 @@
 			y="value"
 			yDomain={[0, null]}
 			yNice
-			padding={{ top: 100, bottom: 1 }}
+			padding={{ top: 1, bottom: 1 }}
 			tooltip={{ mode: 'voronoi' }}
 			let:width
 			let:height
@@ -34,7 +34,6 @@
 		>
 			<Svg>
 				<LinearGradient class="from-primary/50 to-primary/0" vertical let:url>
-					<Area line={{ class: 'stroke-2 stroke-primary opacity-20' }} fill={url} tweened />
 					<RectClipPath
 						x={0}
 						y={0}
@@ -55,7 +54,7 @@
 				y={48}
 				xOffset={4}
 				variant="none"
-				class="text-sm font-semibold text-primary bg-foreground leading-3 bg-base-300 p-2 border border-base-100 border-l-4 border-l-primary rounded-e-md"
+				class="text-sm font-semibold text-primary bg-foreground leading-3 p-2 border border-base-100 border-l-4 border-l-primary rounded-e-md"
 				let:data
 			>
 				{data.value} MH/s

@@ -5,8 +5,6 @@
 	import LinkIcon from '~icons/lucide/external-link';
 	import CustomTooltip from '$lib/components/utils/CustomTooltip.svelte';
 	import { formatTunaValue } from '$lib/utils/formatTuna';
-	import { toast } from 'svelte-sonner';
-
 	export let data;
 
 	function formatTimeAgo(isoDateString) {
@@ -32,7 +30,7 @@
 	}
 </script>
 
-<div>
+<div class="px-4 md:px-20 pt-8">
 	<Card.Root>
 		<Card.Header>
 			<Card.Title class="text-2xl">Latest Blocks</Card.Title>
@@ -62,7 +60,6 @@
 									<a
 										href="/miner/{d.miner}"
 										class="hover:text-secondary border p-1 px-2 rounded-full border-primary dark:border-secondary"
-										on:click={() => toast.loading('Loading miner details...')}
 									>
 										{d.miner.slice(9, 13)}..{d.miner.slice(-4)}
 									</a>
