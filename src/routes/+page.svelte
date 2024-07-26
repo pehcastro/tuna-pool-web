@@ -2,7 +2,6 @@
 	import Hero from '$lib/components/blocks/Hero.svelte';
 	import MetricsPage from '$lib/components/blocks/metrics/MetricsPage.svelte';
 	import MetricsTable from '$lib/components/blocks/metrics/MetricsTable.svelte';
-	import Page from './guide/+page.svelte';
 	export let data;
 
 	let metricsData;
@@ -13,8 +12,6 @@
 			metricsData = data.props.poolData;
 			graphingData = data.props.graphData;
 			tableData = data.props.blocksData;
-
-			console.log('graphingData', graphingData);
 		} else {
 		}
 	}
@@ -27,6 +24,4 @@
 	<MetricsPage data={metricsData} graph={graphingData} />
 
 	<MetricsTable data={tableData} />
-
-	<Page graph={graphingData} />
 </div>

@@ -76,7 +76,7 @@
 				<Card.Header>
 					<Card.Title class="text-2xl">Emission by Day</Card.Title>
 				</Card.Header>
-				<Card.Content>payout table</Card.Content>
+				<Card.Content>SOON</Card.Content>
 			</Card.Root>
 		</div>
 	</div>
