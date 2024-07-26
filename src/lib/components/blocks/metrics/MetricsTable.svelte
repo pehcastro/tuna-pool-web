@@ -7,6 +7,9 @@
 	import { formatTunaValue } from '$lib/utils/formatTuna';
 	import { toast } from 'svelte-sonner';
 
+	import FailIcon from '~icons/lucide/badge-x';
+	import SuccessIcon from '~icons/lucide/badge-check';
+
 	export let data;
 
 	function formatTimeAgo(isoDateString) {
@@ -48,7 +51,7 @@
 						<Table.Head>Reward</Table.Head>
 						<Table.Head>Tx Id</Table.Head>
 						<Table.Head>Effort</Table.Head>
-						<Table.Head>Confirmations</Table.Head>
+						<Table.Head>Confirmated</Table.Head>
 						<Table.Head class="text-right">Age</Table.Head>
 					</Table.Row>
 				</Table.Header>
@@ -81,19 +84,10 @@
 							</Table.Cell>
 							<Table.Cell>{d.effort.toLocaleString()}</Table.Cell>
 							<Table.Cell>
-								{#if +d.confirmationProgress === 0}
-									<Badge variant="outline" class="border-gray-500">{d.confirmationProgress}</Badge>
-								{:else if d.confirmationProgress > 30}
-									<Badge variant="outline" class="border-blue-600">{d.confirmationProgress}</Badge>
-								{:else if d.confirmationProgress > 20}
-									<Badge variant="outline" class="border-green-600">{d.confirmationProgress}</Badge>
-								{:else if d.confirmationProgress > 10}
-									<Badge variant="outline" class="border-yellow-500">{d.confirmationProgress}</Badge
-									>
-								{:else if d.confirmationProgress < 10}
-									<Badge variant="outline" class="border-red-600">{d.confirmationProgress}</Badge>
+								{#if d.confirmationProgress > 0}
+									<SuccessIcon class="size-5 text-green-500" />
 								{:else}
-									<Badge variant="outline" class="border-gray-500">{d.confirmationProgress}</Badge>
+									<FailIcon class="size-5 text-red-500" />
 								{/if}</Table.Cell
 							>
 							<Table.Cell class="text-right"><Badge>{formatTimeAgo(d.created)}</Badge></Table.Cell>
