@@ -10,7 +10,8 @@
 	import { isLoading } from '$lib/store';
 	import CardanoIcon from '~icons/mingcute/cardano-ada-line';
 	import { walletAddress } from '$lib/store';
-	const address = derived(page, ($page) => $page.params.address);
+	import { toast } from 'svelte-sonner';
+	const address = derived(page, ($page) => $page.params.address.replace(/\/$/, ''));
 	export let data: any;
 
 	let minerData: any;
@@ -36,20 +37,35 @@
 			return;
 		}
 
-		const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate`);
-		const hashrateData = await hashrateResponse.json();
-		minerHashrate = hashrateData;
+		try {
+			const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate`);
+			if (hashrateResponse.statusCode === 404) {
+				toast.error('Error fetching miner data');
+				isLoading.set(false);
+				return;
+			}
+			const hashrateData = await hashrateResponse.json();
+			minerHashrate = hashrateData;
 
-		if (workersData && workersData.length > 0) {
-			workersResponses = await Promise.all(
-				workersData.map(async (worker) => {
-					const response = await fetch(
-						`https://api.atago.io/pool/miner/${$address}/${worker.rigId}/hashrate`
-					);
-					const data = await response.json();
-					return data.map((item) => ({ ...item, rigId: worker.rigId }));
-				})
-			);
+			if (workersData && workersData.length > 0) {
+				workersResponses = await Promise.all(
+					workersData.map(async (worker) => {
+						if (!worker.rigId) {
+							return null; // Skip if rigId is invalid or empty
+						}
+						const response = await fetch(
+							`https://api.atago.io/pool/miner/${$address}/${worker.rigId}/hashrate`
+						);
+						const data = await response.json();
+						return data.map((item) => ({ ...item, rigId: worker.rigId }));
+					})
+				);
+				workersResponses = workersResponses.filter((response) => response !== null);
+			}
+		} catch (error) {
+			toast.error(error);
+			isLoading.set(false);
+			console.error('Error fetching hashrate data', error);
 		}
 
 		isLoading.set(false); // Stop loading after data is fetched
