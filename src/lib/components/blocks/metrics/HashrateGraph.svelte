@@ -24,7 +24,7 @@
 		return MHHashrate;
 	}
 
-	$: data = data.map((d) => ({ ...d, date: new Date(d.label), value: convertToHashrate(d.data) }));
+	$: data = data.map((d) => ({ ...d, date: new Date(d.date), value: convertToHashrate(d.value) }));
 
 	$: data = data.map((d) => ({ ...d, value: Number(d.value) }));
 </script>

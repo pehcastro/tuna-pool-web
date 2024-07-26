@@ -65,7 +65,7 @@
 									</a>
 								</CustomTooltip>
 							</Table.Cell>
-							<Table.Cell>{d.reward}</Table.Cell>
+							<Table.Cell>{d.reward.toLocaleString()}</Table.Cell>
 							<Table.Cell>
 								<CustomTooltip content={d.txId}>
 									<a

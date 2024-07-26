@@ -6,9 +6,20 @@
 
 	import * as Card from '$lib/components/ui/card';
 	import HashrateGraph from './HashrateGraph.svelte';
+	import EmissionGraph from './EmissionGraph.svelte';
 
 	export let data;
 	export let graph;
+	export let totalMined;
+	export let emissionGraph;
+
+	function formatNumber(value: number): string {
+		if (value >= 1e12) return (value / 1e12).toFixed(1) + ' T';
+		if (value >= 1e9) return (value / 1e9).toFixed(1) + ' B';
+		if (value >= 1e6) return (value / 1e6).toFixed(1) + ' KK';
+		if (value >= 1e3) return (value / 1e3).toFixed(1) + ' K';
+		return value.toString();
+	}
 </script>
 
 <div class="flex-col md:flex">
@@ -23,7 +34,7 @@
 					<DollarSign class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
-					<div class="text-2xl font-bold">value</div>
+					<div class="text-2xl font-bold">{formatNumber(totalMined.totalMinedTokens)}</div>
 				</Card.Content>
 			</Card.Root>
 			<Card.Root>
@@ -72,11 +83,13 @@
 					<HashrateGraph data={graph} />
 				</Card.Content>
 			</Card.Root>
-			<Card.Root class="col-span-3">
+			<Card.Root class="col-span-4 md:col-span-3">
 				<Card.Header>
 					<Card.Title class="text-2xl">Emission by Day</Card.Title>
 				</Card.Header>
-				<Card.Content>SOON</Card.Content>
+				<Card.Content class="md:h-[25vw] w-full -p-24 h-[100vw]">
+					<EmissionGraph data={emissionGraph} />
+				</Card.Content>
 			</Card.Root>
 		</div>
 	</div>

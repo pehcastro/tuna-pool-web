@@ -7,11 +7,16 @@
 	let metricsData;
 	let graphingData;
 	let tableData;
+	let emissionData;
+	let totalMinedData;
+
 	$: {
 		if (data && data.props) {
 			metricsData = data.props.poolData;
 			graphingData = data.props.graphData;
 			tableData = data.props.blocksData;
+			emissionData = data.props.emissionData;
+			totalMinedData = data.props.totalMinedData;
 		} else {
 		}
 	}
@@ -21,7 +26,12 @@
 	<Hero />
 </div>
 <div class="md:px-32 gap-4 p-4">
-	<MetricsPage data={metricsData} graph={graphingData} />
+	<MetricsPage
+		data={metricsData}
+		graph={graphingData}
+		totalMined={totalMinedData}
+		emissionGraph={emissionData}
+	/>
 
 	<MetricsTable data={tableData} />
 </div>
