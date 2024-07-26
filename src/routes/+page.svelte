@@ -2,6 +2,7 @@
 	import Hero from '$lib/components/blocks/Hero.svelte';
 	import MetricsPage from '$lib/components/blocks/metrics/MetricsPage.svelte';
 	import MetricsTable from '$lib/components/blocks/metrics/MetricsTable.svelte';
+	import Page from './guide/+page.svelte';
 	export let data;
 
 	let metricsData;
@@ -13,21 +14,19 @@
 			graphingData = data.props.graphData;
 			tableData = data.props.blocksData;
 
-			console.log('data', metricsData);
 			console.log('graphingData', graphingData);
-			console.log('tableData', tableData);
 		} else {
 		}
 	}
-
-	// metricsData.LatestBlocks can be used in another place, maybe a new card with the graph
 </script>
 
 <div class="mt-5">
 	<Hero />
 </div>
 <div class="md:px-32 gap-4 p-4 px-8">
-	<MetricsPage data={metricsData} />
+	<MetricsPage data={metricsData} graph={graphingData} />
 
 	<MetricsTable data={tableData} />
+
+	<Page graph={graphingData} />
 </div>

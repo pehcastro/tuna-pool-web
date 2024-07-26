@@ -5,8 +5,10 @@
 	import Users from '~icons/lucide/users';
 
 	import * as Card from '$lib/components/ui/card';
+	import HashrateGraph from './HashrateGraph.svelte';
 
 	export let data;
+	export let graph;
 </script>
 
 <div class="flex-col md:flex">
@@ -60,16 +62,19 @@
 				</Card.Content>
 			</Card.Root>
 		</div>
-		<div class="hidden grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+
+		<div class="hidden md:grid gap-4 md:grid-cols-2 lg:grid-cols-7">
 			<Card.Root class="col-span-4">
 				<Card.Header>
-					<Card.Title class="text-2xl">Minted Data</Card.Title>
+					<Card.Title class="text-2xl">Hashrate History</Card.Title>
 				</Card.Header>
-				<Card.Content>content here</Card.Content>
+				<Card.Content class="h-[25vw] w-full -p-24">
+					<HashrateGraph data={graph} />
+				</Card.Content>
 			</Card.Root>
 			<Card.Root class="col-span-3">
 				<Card.Header>
-					<Card.Title class="text-2xl">Latest Distribution</Card.Title>
+					<Card.Title class="text-2xl">Emission by Day</Card.Title>
 				</Card.Header>
 				<Card.Content>payout table</Card.Content>
 			</Card.Root>
