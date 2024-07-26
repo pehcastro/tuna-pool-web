@@ -51,7 +51,7 @@
 						<Table.Head>Reward</Table.Head>
 						<Table.Head>Tx Id</Table.Head>
 						<Table.Head>Effort</Table.Head>
-						<Table.Head>Confirmated</Table.Head>
+						<Table.Head>Confirmed</Table.Head>
 						<Table.Head class="text-right">Age</Table.Head>
 					</Table.Row>
 				</Table.Header>
