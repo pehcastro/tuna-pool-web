@@ -1,6 +1,8 @@
+import { isLoading } from '$lib/store';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
+	isLoading.set(true);
 	try {
 		const [poolResponse, blocksResponse, hashrateResponse, emissionResponse, totalMinedResponse] =
 			await Promise.all([
@@ -35,8 +37,10 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		const emissionData = await emissionResponse.json();
 		const totalMinedData = await totalMinedResponse.json();
 
+		isLoading.set(false);
 		return { props: { poolData, blocksData, graphData, emissionData, totalMinedData } };
 	} catch (err) {
+		isLoading.set(false);
 		console.error('Error fetching data:', err);
 		return { errors: [err.message] };
 	}

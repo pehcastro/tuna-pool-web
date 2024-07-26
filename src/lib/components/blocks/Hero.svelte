@@ -1,13 +1,9 @@
 <script lang="ts">
 	import Badge from '../ui/badge/badge.svelte';
-	import Button from '../ui/button/button.svelte';
 	import SearchBar from '../utils/SearchBar.svelte';
 </script>
 
 <div class="relative overflow-hidden lg:py-20">
-	<!-- Gradients -->
-
-	<!-- End Gradients -->
 	<div class="relative z-10">
 		<div class="container py-8">
 			<div class="max-w-2xl text-center mx-auto">

@@ -7,7 +7,8 @@
 	import { derived } from 'svelte/store';
 	import MinerMetrics from '$lib/components/blocks/miner/MinerMetrics.svelte';
 	import MinerTable from '$lib/components/blocks/miner/MinerTable.svelte';
-
+	import { isLoading } from '$lib/store';
+	import CardanoIcon from '~icons/mingcute/cardano-ada-line';
 	const address = derived(page, ($page) => $page.params.address);
 	export let data: any;
 
@@ -27,9 +28,14 @@
 	}
 
 	onMount(async () => {
-		if (!data.data) return;
-		const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate
-`);
+		isLoading.set(true); // Start loading
+
+		if (!data.data) {
+			isLoading.set(false); // Stop loading if no data
+			return;
+		}
+
+		const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate`);
 		const hashrateData = await hashrateResponse.json();
 		minerHashrate = hashrateData;
 
@@ -44,10 +50,16 @@
 				})
 			);
 		}
+
+		isLoading.set(false); // Stop loading after data is fetched
 	});
 </script>
 
-{#if data.data.workers && data.data.workers.length > 0}
+{#if $isLoading}
+	<div class="flex justify-center h-[70vh] items-center">
+		<CardanoIcon class="size-40 animate-spin-slow" />
+	</div>
+{:else if data.data.workers && data.data.workers.length > 0}
 	<div>
 		<MinerHeader data={minerData} />
 	</div>

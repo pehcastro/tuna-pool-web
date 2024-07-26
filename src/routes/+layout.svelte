@@ -6,7 +6,7 @@
 </script>
 
 <div class="mb-44">
-	<Toaster />
+	<Toaster position="bottom-center" class="bg-red-500" />
 	<ModeWatcher />
 	<div class="mt-2">
 		<Navbar />

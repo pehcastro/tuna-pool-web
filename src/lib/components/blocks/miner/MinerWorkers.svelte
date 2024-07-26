@@ -36,7 +36,6 @@
 	function makeDate(date) {
 		return new Date(date);
 	}
-	console.log('workers', workers);
 </script>
 
 <p class="md:px-20 px-4 font-bold text-2xl py-4">My Workers</p>
