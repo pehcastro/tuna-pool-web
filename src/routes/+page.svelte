@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Hero from '$lib/components/blocks/Hero.svelte';
 	import MetricsPage from '$lib/components/blocks/metrics/MetricsPage.svelte';
 	import MetricsTable from '$lib/components/blocks/metrics/MetricsTable.svelte';
@@ -9,6 +9,7 @@
 	let tableData;
 	let emissionData;
 	let totalMinedData;
+	let minersData;
 
 	$: {
 		if (data && data.props) {
@@ -17,6 +18,7 @@
 			tableData = data.props.blocksData;
 			emissionData = data.props.emissionData;
 			totalMinedData = data.props.totalMinedData;
+			minersData = data.props.minersData;
 		} else {
 		}
 	}
@@ -31,6 +33,7 @@
 		graph={graphingData}
 		totalMined={totalMinedData}
 		emissionGraph={emissionData}
+		miners={minersData}
 	/>
 
 	<MetricsTable data={tableData} />

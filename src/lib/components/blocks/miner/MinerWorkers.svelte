@@ -1,41 +1,11 @@
 <script lang="ts">
-	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import * as Card from '$lib/components/ui/card';
-	import * as HoverCard from '$lib/components/ui/hover-card';
-	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import CustomTooltip from '$lib/components/utils/CustomTooltip.svelte';
 	import SparklineGraph from './SparklineGraph.svelte';
-
+	import { formatHashrate } from '$lib/utils/formatHashrate';
+	import { formatTimeAgo } from '$lib/utils/formatTimeAgo';
 	export let workers;
 	export let hashrates;
-
-	function formatTimeAgo(isoDateString: string): string {
-		const date = new Date(isoDateString);
-		const now = new Date();
-		const diffInMs = now.getTime() - date.getTime();
-		const diffInMinutes = Math.floor(diffInMs / 60000);
-		const diffInHours = Math.floor(diffInMinutes / 60);
-		const diffInDays = Math.floor(diffInHours / 24);
-
-		if (diffInMinutes < 60) {
-			return `${diffInMinutes} minutes ago`;
-		} else if (diffInHours < 24) {
-			return `${diffInHours} hours ago`;
-		} else if (diffInDays === 1) {
-			return `1 day ago`;
-		} else {
-			return `${diffInDays} days ago`;
-		}
-	}
-
-	function convertToHashrate(data) {
-		const MHHashrate = data / 1e6;
-		return MHHashrate.toFixed(2);
-	}
-
-	function makeDate(date) {
-		return new Date(date);
-	}
 </script>
 
 <p class="md:px-20 px-4 font-bold text-2xl py-4">My Workers</p>
@@ -50,7 +20,7 @@
 							<Card.Title>{w.rigId}</Card.Title>
 						</div>
 
-						<CustomTooltip content={makeDate(w.lastSeen)}>
+						<CustomTooltip content={new Date(w.lastSeen)}>
 							<div
 								class="text-xs border rounded-full p-0.5 px-1 border-primary text-gray-900 dark:text-slate-300"
 							>
@@ -64,7 +34,8 @@
 						<div class="flex w-full justify-between items-center">
 							<p>
 								<span class="text-primary font-semibold mr-1">Hashrate:</span>
-								{convertToHashrate(w.hashrate)} MH/s
+								{formatHashrate(w.hashrate).rate}
+								{formatHashrate(w.hashrate).denomination}
 							</p>
 							<p>
 								<span class="text-primary font-semibold mr-1">Shares/s:</span>{w.sharesPerSecond}

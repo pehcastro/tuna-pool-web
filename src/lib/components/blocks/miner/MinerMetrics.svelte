@@ -8,28 +8,9 @@
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import LinkIcon from '~icons/lucide/external-link';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
-
+	import { formatTimeAgo } from '$lib/utils/formatTimeAgo';
 	export let graph;
 	export let payments;
-
-	function formatTimeAgo(isoDateString: string): string {
-		const date = new Date(isoDateString);
-		const now = new Date();
-		const diffInMs = now.getTime() - date.getTime();
-		const diffInMinutes = Math.floor(diffInMs / 60000);
-		const diffInHours = Math.floor(diffInMinutes / 60);
-		const diffInDays = Math.floor(diffInHours / 24);
-
-		if (diffInMinutes < 60) {
-			return `${diffInMinutes} minutes ago`;
-		} else if (diffInHours < 24) {
-			return `${diffInHours} hours ago`;
-		} else if (diffInDays === 1) {
-			return `1 day ago`;
-		} else {
-			return `${diffInDays} days ago`;
-		}
-	}
 </script>
 
 <div class="flex flex-col md:flex-row justify-center pt-10">

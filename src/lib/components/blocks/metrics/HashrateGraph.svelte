@@ -16,22 +16,16 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Slider } from '$lib/components/ui/slider';
+	import { formatHashrate } from '$lib/utils/formatHashrate';
 
 	export let data;
-
-	function convertToHashrate(data) {
-		const MHHashrate = data / 1000000;
-		return MHHashrate;
-	}
 
 	let labels = false;
 	let sliderValue = [100];
 
-	$: data = data.map((d) => ({ ...d, date: new Date(d.date), value: convertToHashrate(d.value) }));
+	$: data = data.map((d) => ({ ...d, date: new Date(d.date) }));
 
 	$: slicedData = data.slice(0, sliderValue);
-
-	// $: data = data.map((d) => ({ ...d, value: Number(d.value) }));
 </script>
 
 <div class="flex h-full w-full flex-col">
@@ -53,7 +47,7 @@
 	</div>
 
 	<div class="flex h-full w-full">
-		<div class={labels ? 'flex w-full h-full py-6 pr-8 pl-4' : 'flex w-full h-full'}>
+		<div class={labels ? 'flex w-full h-full py-6 pr-14 pl-4' : 'flex w-full h-full'}>
 			<Chart
 				data={slicedData}
 				x="date"
@@ -75,7 +69,7 @@
 							grid
 							rule
 							format={(d) => {
-								return d.toFixed();
+								return formatHashrate(d).rate + formatHashrate(d).denomination;
 							}}
 						/>
 						<Axis placement="bottom" format={(d) => format(d, 'MM-dd')} rule />
@@ -97,7 +91,7 @@
 					</LinearGradient>
 					{#if labels}
 						<Labels
-							format="integer"
+							format={(d) => Number(formatHashrate(d).rate).toFixed()}
 							offset={10}
 							class="text-xs fill-surface-content -stroke-surface-100"
 						/>
@@ -112,7 +106,8 @@
 					class="text-sm font-semibold text-primary bg-foreground leading-3 bg-base-300 p-2 border border-base-100 border-l-4 border-l-primary rounded-e-md"
 					let:data
 				>
-					{data.value} MH/s
+					{formatHashrate(data.value).rate}
+					{formatHashrate(data.value).denomination}
 				</Tooltip>
 
 				<Tooltip x={4} y={4} variant="none" class="text-sm font-semibold leading-3  " let:data>

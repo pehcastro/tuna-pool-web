@@ -4,23 +4,19 @@
 	import DollarSign from '~icons/lucide/circle-dollar-sign';
 	import Users from '~icons/lucide/users';
 	import { formatTunaValue } from '$lib/utils/formatTuna';
+	import { formatToNetNumber } from '$lib/utils/formatToNetNumber';
 
 	import * as Card from '$lib/components/ui/card';
 	import HashrateGraph from './HashrateGraph.svelte';
 	import EmissionGraph from './EmissionGraph.svelte';
+	import DivisionChart from './DivisionChart.svelte';
+	import RankingTable from './RankingTable.svelte';
 
 	export let data;
 	export let graph;
 	export let totalMined;
 	export let emissionGraph;
-
-	function formatNumber(value: number): string {
-		if (value >= 1e12) return (value / 1e12).toFixed(1) + ' T';
-		if (value >= 1e9) return (value / 1e9).toFixed(1) + ' B';
-		if (value >= 1e6) return (value / 1e6).toFixed(1) + ' KK';
-		if (value >= 1e3) return (value / 1e3).toFixed(1) + ' K';
-		return value.toString();
-	}
+	export let miners;
 </script>
 
 <div class="flex-col md:flex">
@@ -35,8 +31,8 @@
 					<DollarSign class="text-muted-foreground h-4 w-4" />
 				</Card.Header>
 				<Card.Content>
-					<div class="text-2xl font-bold">
-						{formatNumber(formatTunaValue(totalMined.totalMinedTokens))}
+					<div class="text-2xl font-bold uppercase">
+						{formatToNetNumber(formatTunaValue(totalMined.totalMinedTokens))}
 					</div>
 				</Card.Content>
 			</Card.Root>
@@ -77,7 +73,7 @@
 			</Card.Root>
 		</div>
 
-		<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+		<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
 			<Card.Root class="col-span-4">
 				<Card.Header>
 					<Card.Title class="text-2xl">Hashrate History</Card.Title>
@@ -94,6 +90,25 @@
 					<EmissionGraph data={emissionGraph} />
 				</Card.Content>
 			</Card.Root>
+
+			<Card.Root class="col-span-4 md:col-span-2">
+				<Card.Header>
+					<Card.Title class="text-2xl">Hashrate by Miners</Card.Title>
+				</Card.Header>
+				<Card.Content class="md:h-[25vw] w-full -p-24 h-[100vw]">
+					<DivisionChart data={miners} />
+				</Card.Content>
+			</Card.Root>
+			<Card.Root class="col-span-4 md:col-span-5">
+				<Card.Header>
+					<Card.Title class="text-2xl">Miners Ranking</Card.Title>
+				</Card.Header>
+				<Card.Content class="md:h-[25vw] w-full -p-24 h-[100vw]">
+					<RankingTable data={miners} />
+				</Card.Content>
+			</Card.Root>
 		</div>
+
+		<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7"></div>
 	</div>
 </div>

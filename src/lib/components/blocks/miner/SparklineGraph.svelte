@@ -3,17 +3,10 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { scaleTime } from 'd3-scale';
 	import { format } from 'date-fns';
-
+	import { formatHashrate } from '$lib/utils/formatHashrate';
 	export let data;
 
-	function convertToHashrate(data) {
-		const MHHashrate = data / 1e6;
-		return MHHashrate;
-	}
-
-	$: data = data.map((d) => ({ ...d, date: new Date(d.date), value: convertToHashrate(d.value) }));
-
-	$: data = data.map((d) => ({ ...d, value: Number(d.value) }));
+	$: data = data.map((d) => ({ ...d, date: new Date(d.date) }));
 </script>
 
 <div class="flex h-full w-full">
@@ -57,7 +50,8 @@
 				class="text-sm font-semibold text-primary bg-foreground leading-3 p-2 border border-base-100 border-l-4 border-l-primary rounded-e-md"
 				let:data
 			>
-				{data.value} MH/s
+				{formatHashrate(data.value).rate}
+				{formatHashrate(data.value).denomination}
 			</Tooltip>
 
 			<Tooltip x={4} y={4} variant="none" class="text-sm font-semibold leading-3  " let:data>

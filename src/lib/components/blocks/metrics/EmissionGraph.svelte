@@ -6,7 +6,7 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Slider } from '$lib/components/ui/slider';
-
+	import { formatToNetNumber } from '$lib/utils/formatToNetNumber';
 	export let data;
 
 	let labels = false;
@@ -17,14 +17,6 @@
 	$: data = data.map((d) => ({ ...d, value: Number(d.value) }));
 
 	$: slicedData = data.slice(0, sliderValue);
-
-	function formatNumber(value: number): string {
-		if (value >= 1e12) return (value / 1e12).toFixed(1) + ' t';
-		if (value >= 1e9) return (value / 1e9).toFixed(1) + ' b';
-		if (value >= 1e6) return (value / 1e6).toFixed(1) + ' kk';
-		if (value >= 1e3) return (value / 1e3).toFixed(1) + ' k';
-		return value.toString();
-	}
 </script>
 
 <div class="flex h-full w-full flex-col">
@@ -64,7 +56,7 @@
 							grid
 							rule
 							format={(d) => {
-								return formatNumber(formatTunaValue(d));
+								return formatToNetNumber(formatTunaValue(d));
 							}}
 						/>
 						<Axis placement="bottom" format={(d) => format(d, 'MM-dd')} rule />
@@ -76,7 +68,7 @@
 					/>
 					{#if labels}
 						<Labels
-							format={(d) => formatNumber(formatTunaValue(d))}
+							format={(d) => formatToNetNumber(formatTunaValue(d))}
 							offset={10}
 							class="text-xs fill-surface-content -stroke-surface-100"
 						/>
@@ -95,7 +87,7 @@
 					let:data
 					header={(data) => format(data.date, 'eee, MMMM do')}
 				>
-					<span class="text-foreground pt-2">{formatNumber(formatTunaValue(data.value))}</span>
+					<span class="text-foreground pt-2">{formatToNetNumber(formatTunaValue(data.value))}</span>
 				</Tooltip>
 			</Chart>
 		</div>

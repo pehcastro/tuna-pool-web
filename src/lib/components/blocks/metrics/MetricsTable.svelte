@@ -6,32 +6,20 @@
 	import CustomTooltip from '$lib/components/utils/CustomTooltip.svelte';
 	import { formatTunaValue } from '$lib/utils/formatTuna';
 	import { toast } from 'svelte-sonner';
-
+	import { formatTimeAgo } from '$lib/utils/formatTimeAgo';
 	import FailIcon from '~icons/lucide/badge-x';
 	import SuccessIcon from '~icons/lucide/badge-check';
+	import { formatHash } from '$lib/utils/formatBlockHash';
+	import * as Pagination from '$lib/components/ui/pagination';
 
 	export let data;
+	let currentPage = 1;
+	const perPage = 15;
+	const totalPages = Math.ceil(data.length / perPage);
+	$: paginatedData = data.slice((currentPage - 1) * perPage, currentPage * perPage);
 
-	function formatTimeAgo(isoDateString) {
-		const date = new Date(isoDateString);
-		const now = new Date();
-		const diffInMs = now - date;
-		const diffInMinutes = Math.floor(diffInMs / 60000);
-		const diffInHours = Math.floor(diffInMinutes / 60);
-		const diffInDays = Math.floor(diffInHours / 24);
-
-		if (diffInMinutes < 60) {
-			return `${diffInMinutes} minutes ago`;
-		} else if (diffInHours < 24) {
-			return `${diffInHours} hours ago`;
-		} else {
-			return `${diffInDays} days ago`;
-		}
-	}
-
-	function formatHash(value: string) {
-		const regex = /^0{4,}|0{4,}$/g;
-		return value.replace(regex, (match) => `0<sub>${match.length}</sub> `);
+	function handlePageChange(page) {
+		currentPage = page;
 	}
 </script>
 
@@ -42,7 +30,7 @@
 		</Card.Header>
 		<Card.Content>
 			<Table.Root>
-				<Table.Caption>Based on the latest pool mintings.</Table.Caption>
+				<Table.Caption class="py-6">Based on the latest pool mintings.</Table.Caption>
 				<Table.Header>
 					<Table.Row>
 						<Table.Head>Block Height</Table.Head>
@@ -56,7 +44,7 @@
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{#each data as d, i (i)}
+					{#each paginatedData as d, i (i)}
 						<Table.Row>
 							<Table.Cell class="font-medium">{d.height}</Table.Cell>
 							<Table.Cell>{@html formatHash(d.id)}</Table.Cell>
@@ -88,13 +76,40 @@
 									<SuccessIcon class="size-5 text-green-500" />
 								{:else}
 									<FailIcon class="size-5 text-red-500" />
-								{/if}</Table.Cell
-							>
+								{/if}
+							</Table.Cell>
 							<Table.Cell class="text-right"><Badge>{formatTimeAgo(d.created)}</Badge></Table.Cell>
 						</Table.Row>
 					{/each}
 				</Table.Body>
 			</Table.Root>
+			<Pagination.Root count={totalPages} perPage={1} let:pages let:currentPage>
+				<Pagination.Content>
+					<Pagination.Item>
+						<Pagination.PrevButton on:click={() => handlePageChange(currentPage - 1)} />
+					</Pagination.Item>
+					{#each pages as page (page.key)}
+						{#if page.type === 'ellipsis'}
+							<Pagination.Item>
+								<Pagination.Ellipsis />
+							</Pagination.Item>
+						{:else}
+							<Pagination.Item isVisible={currentPage == page.value}>
+								<Pagination.Link
+									{page}
+									isActive={currentPage == page.value}
+									on:click={() => handlePageChange(page.value)}
+								>
+									{page.value}
+								</Pagination.Link>
+							</Pagination.Item>
+						{/if}
+					{/each}
+					<Pagination.Item>
+						<Pagination.NextButton on:click={() => handlePageChange(currentPage + 1)} />
+					</Pagination.Item>
+				</Pagination.Content>
+			</Pagination.Root>
 		</Card.Content>
 		<Card.Footer></Card.Footer>
 	</Card.Root>
