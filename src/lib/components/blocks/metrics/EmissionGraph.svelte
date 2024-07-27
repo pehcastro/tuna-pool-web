@@ -6,6 +6,7 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Slider } from '$lib/components/ui/slider';
+
 	export let data;
 
 	let labels = false;
@@ -63,7 +64,7 @@
 							grid
 							rule
 							format={(d) => {
-								return formatNumber(d);
+								return formatNumber(formatTunaValue(d));
 							}}
 						/>
 						<Axis placement="bottom" format={(d) => format(d, 'MM-dd')} rule />
@@ -75,7 +76,7 @@
 					/>
 					{#if labels}
 						<Labels
-							format={(d) => formatNumber(d)}
+							format={(d) => formatNumber(formatTunaValue(d))}
 							offset={10}
 							class="text-xs fill-surface-content -stroke-surface-100"
 						/>
