@@ -19,7 +19,7 @@
 				<Card.Title class="text-2xl">Miner Info</Card.Title>
 				<Card.Description
 					><a
-						href="https://preview.cardanoscan.io/address/{$address}"
+						href="https://cardanoscan.io/address/{$address}"
 						class="text-primary dark:text-secondary flex gap-2 break-all"
 						>{$address}
 						<CardanoIcon class="size-6 text-primary dark:text-white" /></a

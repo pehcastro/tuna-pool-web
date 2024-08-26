@@ -10,12 +10,12 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			totalMinedResponse,
 			minersResponse
 		] = await Promise.all([
-			fetch('https://api.atago.io/pool'),
-			fetch('https://api.atago.io/pool/blocks'),
-			fetch('https://api.atago.io/pool/hashrate'),
-			fetch('https://api.atago.io/pool/emission'),
-			fetch('https://api.atago.io/pool/total-mined-tokens'),
-			fetch('https://api.atago.io/pool/miners')
+			fetch('https://api-mainnet.atago.io/pool'),
+			fetch('https://api-mainnet.atago.io/pool/blocks'),
+			fetch('https://api-mainnet.atago.io/pool/hashrate'),
+			fetch('https://api-mainnet.atago.io/pool/emission'),
+			fetch('https://api-mainnet.atago.io/pool/total-mined-tokens'),
+			fetch('https://api-mainnet.atago.io/pool/miners')
 		]);
 
 		if (!poolResponse.ok) {

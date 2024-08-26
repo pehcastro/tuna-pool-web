@@ -55,7 +55,7 @@
 										href="/miner/{d.miner}"
 										class="hover:text-secondary border p-1 px-2 rounded-full border-primary dark:border-secondary"
 									>
-										{d.miner.slice(9, 13)}..{d.miner.slice(-4)}
+										{d.miner.slice(5, 13)}..{d.miner.slice(-4)}
 									</a>
 								</CustomTooltip>
 							</Table.Cell>
@@ -63,7 +63,7 @@
 							<Table.Cell>
 								<CustomTooltip content={d.txId}>
 									<a
-										href="https://preview.cardanoscan.io/transaction/{d.txId}"
+										href="https://cardanoscan.io/transaction/{d.txId}"
 										target="_blank"
 										class="hover:text-secondary flex gap-2"
 										>{d.txId.slice(0, 4)}...{d.txId.slice(-4)} <LinkIcon /></a

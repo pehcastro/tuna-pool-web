@@ -37,7 +37,9 @@
 		}
 
 		try {
-			const hashrateResponse = await fetch(`https://api.atago.io/pool/miner/${$address}/hashrate`);
+			const hashrateResponse = await fetch(
+				`https://api-mainnet.atago.io/pool/miner/${$address}/hashrate`
+			);
 			if (hashrateResponse.statusCode === 404) {
 				toast.error('Error fetching miner data');
 				isLoading.set(false);
@@ -53,7 +55,7 @@
 							return null; // Skip if rigId is invalid or empty
 						}
 						const response = await fetch(
-							`https://api.atago.io/pool/miner/${$address}/${worker.rigId}/hashrate`
+							`https://api-mainnet.atago.io/pool/miner/${$address}/${worker.rigId}/hashrate`
 						);
 						const data = await response.json();
 						return data.map((item) => ({ ...item, rigId: worker.rigId }));

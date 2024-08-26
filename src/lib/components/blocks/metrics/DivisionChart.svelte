@@ -75,7 +75,7 @@
 					{/each}
 				</Pie>
 			</Svg>
-			<Tooltip header={(d) => `${d.miner.slice(9, 13)}..${d.miner.slice(-4)}`} let:data>
+			<Tooltip header={(d) => `${d.miner.slice(5, 13)}..${d.miner.slice(-4)}`} let:data>
 				<TooltipItem
 					label="hashrate"
 					value={formatHashrate(data.hashrate).rate + formatHashrate(data.hashrate).denomination}

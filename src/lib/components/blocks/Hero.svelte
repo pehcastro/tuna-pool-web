@@ -8,7 +8,7 @@
 		<div class="container py-8">
 			<div class="max-w-2xl text-center mx-auto">
 				<Badge variant="outline" class="border-gray-600/50 dark:border-slate-200/15"
-					>LIVE ON TESTNET</Badge
+					>LIVE ON MAINNET</Badge
 				>
 				<!-- Title -->
 				<div class="mt-5 max-w-2xl">

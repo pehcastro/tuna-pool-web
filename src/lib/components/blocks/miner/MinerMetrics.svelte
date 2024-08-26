@@ -42,7 +42,7 @@
 										<span class="font-semibold text-primary mr-1">MINER:</span>
 										<CustomTooltip content={p.address}>
 											<a href="/miner/{p.address}" class="hover:text-secondary">
-												{p.address.slice(9, 13)}..{p.address.slice(-4)}
+												{p.address.slice(5, 13)}..{p.address.slice(-4)}
 											</a>
 										</CustomTooltip>
 									</p>
@@ -51,7 +51,7 @@
 									<span class="text-primary font-semibold mr-1">Tx:</span>
 									<CustomTooltip content={p.txid}>
 										<a
-											href="https://preview.cardanoscan.io/transaction/{p.txid}"
+											href="https://cardanoscan.io/transaction/{p.txid}"
 											target="_blank"
 											class="hover:text-secondary flex gap-2"
 											>{p.txid.slice(0, 4)}...{p.txid.slice(-4)} <LinkIcon />

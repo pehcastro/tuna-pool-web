@@ -34,7 +34,7 @@
 											href="/miner/{d.miner}"
 											on:click={() => toast.loading('Loading miner details...')}
 										>
-											{d.miner.slice(9, 13)}..{d.miner.slice(-4)}
+											{d.miner.slice(5, 13)}..{d.miner.slice(-4)}
 										</a>
 									</Badge>
 								</CustomTooltip>
