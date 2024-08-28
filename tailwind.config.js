@@ -3,7 +3,11 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
-	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/layerchart/**/*.{svelte,js}'],
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		'./node_modules/layerchart/**/*.{svelte,js}',
+		'/node_modules/breezesdk/**/*.{html,js,svelte,ts}'
+	],
 	safelist: ['dark'],
 	theme: {
 		container: {
