@@ -11,6 +11,7 @@
 	import SuccessIcon from '~icons/lucide/badge-check';
 	import { formatHash } from '$lib/utils/formatBlockHash';
 	import * as Pagination from '$lib/components/ui/pagination';
+	import SpinnerIcon from '~icons/svg-spinners/270-ring'
 
 	export let data;
 	let currentPage = 1;
@@ -26,7 +27,7 @@
 <div>
 	<Card.Root>
 		<Card.Header>
-			<Card.Title class="text-2xl">Latest Blocks</Card.Title>
+			<Card.Title class="text-2xl">Latest Pool Mined Blocks</Card.Title>
 		</Card.Header>
 		<Card.Content>
 			<Table.Root>
@@ -70,7 +71,13 @@
 									>
 								</CustomTooltip>
 							</Table.Cell>
-							<Table.Cell>{d.effort.toLocaleString()}</Table.Cell>
+							<Table.Cell>
+								{#if d.effort === 0 }
+								<SpinnerIcon class="text-secondary"/>
+								{:else}
+								{d.effort.toLocaleString()}
+								{/if}
+							</Table.Cell>
 							<Table.Cell>
 								{#if d.confirmationProgress > 0}
 									<SuccessIcon class="size-5 text-green-500" />

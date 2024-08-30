@@ -6,7 +6,7 @@
 
 	export let data;
 
-	$: console.log('prod debug: miners', data);
+
 	$: dataSum = sum(data, (d) => d.hashrate);
 
 	const colorKeys = [...new Set(data.map((d) => d.miner))];
